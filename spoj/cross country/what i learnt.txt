@@ -1,0 +1,2 @@
+that where double dimention array of int fails, char comes to the rescue :)
+or, can be declared as static. declaring itnormally would push it on heap, and will overflow with the limits.
