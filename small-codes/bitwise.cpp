@@ -5,11 +5,14 @@ using namespace std;
 #define FOR1(i, n) for(int i=1; i<n; ++i)
 #define FORrev(i, n) for(int i=n-1; i>=0; --i)
 #define pb push_back
-#define ll long long
 
 int main() {
 
+    int x, y;
+    cin>>x>>y;
 
+    int p= x ^ y;
+    cout<<p;
 
     return 0;
 }

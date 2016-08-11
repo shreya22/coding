@@ -16,29 +16,20 @@ using namespace std;
 int main() {
 
     int n, q;
+    int a, x, y; //a: 1/2
+    int lastAns=0;
     cin>>n>>q;
 
-    vector<vector<int>> v(n);
-    vector<vector<int>>::iterator it;
-
-    long flag, x, y;
-    int lastans=0, index;
-
+    vector<vector<int>> v(n, vector<int>(n));
     FOR(i, q){
-        cin>>flag>>x>>y;
+        cin>>a>>x>>y;
 
-        if(flag == 1){
-            index= (x^lastans)%n;
-            v[index].push_back(y);
-
+        if(a==1){
+            lastAns= a[].push_back(y);
         }else{
-            index= (x^lastans)%n;
-            lastans= v[index][y%v[index].size()];
 
-            cout<<lastans<<endl;
         }
     }
-
 
     return 0;
 }

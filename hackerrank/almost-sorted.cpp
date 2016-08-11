@@ -14,12 +14,24 @@ using namespace std;
 #define FOR1(i, n) for(int i=1; i<n; ++i)
 #define FORrev(i, n) for(int i=n-1; i>=0; --i)
 
+long a[1000000], b[1000000];
+int n;
+
+int arr_comp(long a[], long b[])
+{
+    int temp=0;
+    FOR(i, n)
+        if(a[0] == b[0])
+            temp++;
+
+    if(temp == n) return 1;
+    return 0;
+}
+
 int main() {
 
-    int n;
     cin>>n;
 
-    array<long, 1000000> a, b;
     FOR(i, n){
         cin>>a[i];
         b[i]= a[i];
@@ -44,12 +56,12 @@ int main() {
 
     if(start == -1 && end == -1) cout<<"yes";
     else{
-        swap(start, end);
-        if(a == b) cout<<"yes"<<endl<<"swap "<<start+1<<" "<<end+1;
+        swap(a[start], a[end]); FOR(i, n)cout<<a[i]<<" ";
+        if(arr_comp(a, b)) cout<<"yes"<<endl<<"swap "<<start+1<<" "<<end+1;
         else{
             for(int i=start; i<=(end-start)/2+start; ++i)
                 swap(a[i], a[end-i + start]);
-            if(a == b) cout<<"yes"<<endl<<"reverse "<<start+1<<" "<<end+1;
+            if(arr_comp(a, b)) cout<<"yes"<<endl<<"reverse "<<start+1<<" "<<end+1;
             else
                 cout<<"no";
         }
