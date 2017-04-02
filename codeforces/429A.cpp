@@ -10,10 +10,13 @@ using namespace std;
 int n;
 vector< vector<int> > v(100001);
 vector<int> goal, current;
+stack<int> s;
+queue<int> q;
+
 vector<int> visited;
 
 int cnt=0;      //count of number of flips
-vector<int> flip(n);    //stores elements flipped
+vector<int> flip;    //stores elements flipped
 
 void maketree()
 {
@@ -21,7 +24,7 @@ void maketree()
     FOR(i, n-1)
     {
         cin>>x1>>x2;
-        v[x2-1].pb(x1-1);
+        v[x2].pb(x1);
     }
 }
 
@@ -29,6 +32,8 @@ vector<int> fill_array()
 {
     vector<int> x;
     int temp;
+
+    x.pb(-1);
     FOR(i, n)
     {
         cin>>temp;
@@ -37,8 +42,52 @@ vector<int> fill_array()
     return x;
 }
 
-void dfs(int start)
+void toggle(int root)
 {
+    queue<int> rand;
+    rand.push(root);
+
+    int temp;
+    for(int i=1; rand.size()!=0; ++i)
+    {
+        FOR(j, rand.size())
+        {
+            temp= rand.front();
+            rand.pop();
+
+            if(i%2 == 1)
+                current[temp]= !current[temp];
+
+            FOR(p, v[temp].size()) rand.push(v[temp][p]);
+        }
+    }
+}
+
+void dfs(int root)
+{
+    int temp;
+    if(!visited[root])
+    {
+        s.push(root);
+        visited[root]= 1;
+
+        while(s.size() != 0)
+        {
+            temp= s.top();
+            s.pop();
+
+            //cout<<temp<<endl;
+
+            if(current[temp] != goal[temp])     // a[temp]==0
+            {//cout<<"wohoo"<<endl;
+                toggle(temp);
+                flip.pb(temp);
+            }
+
+            FORrev(i, v[temp].size())
+                s.push(v[temp][i]);
+        }
+    }
 
 }
 
@@ -47,13 +96,20 @@ int main() {
     cin>>n;
     maketree();     //fill up vector v
 
+    visited.pb(-1);
+    FOR(i, n) visited.pb(0);
+
     current= fill_array();
     goal= fill_array();
 
-    dfs(0);
-    cout<<cnt;
+    dfs(1);
+    // cout<<"---------------------------------"<<endl;
+    // cout<<flip.size()<<endl;
 
-    cout<<v.size();
+    // FOR(i, flip.size()) cout<<flip[i]<<endl;
+
+    FOR(i, current.size()) cout<<current[i]<<" "; cout<<endl;
+    FOR(i, goal.size()) cout<<goal[i]<<" ";
 
     return 0;
 }

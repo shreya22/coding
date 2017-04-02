@@ -18,7 +18,7 @@ using namespace std;
 
 struct country{
     string name;
-    int g=0; int s=0; int b=0;
+    int g; int s; int b;
 };                      //contains country details
 
 vector<country> c;

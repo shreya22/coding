@@ -7,6 +7,14 @@ using namespace std;
 #define pb push_back
 #define ll long long
 
+int min(int a, int b){
+    return (a<b)?a:b;
+}
+
+int max(int a, int b){
+    return (a>b)?a:b;
+}
+
 int main() {
 
 
